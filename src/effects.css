@@ -1,0 +1,44 @@
+.style-effect {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  overflow: visible;
+  z-index: 2;
+  pointer-events: none;
+  animation: style-effect-fade 500ms cubic-bezier(.18, .8, .39, 1) both;
+}
+
+.style-effect__trail {
+  animation: style-effect-sweep 500ms cubic-bezier(.18, .8, .39, 1) both;
+}
+
+.style-effect__trail--top { --sweep-x: 45px; --sweep-y: 0px; }
+.style-effect__trail--right { --sweep-x: 0px; --sweep-y: 45px; }
+.style-effect__trail--bottom { --sweep-x: -45px; --sweep-y: 0px; }
+.style-effect__trail--left { --sweep-x: 0px; --sweep-y: -45px; }
+
+.style-effect__rim {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: style-effect-open 500ms cubic-bezier(.18, .8, .39, 1) both;
+}
+
+@keyframes style-effect-fade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes style-effect-sweep {
+  from { transform: translate(0, 0); }
+  to { transform: translate(var(--sweep-x), var(--sweep-y)); }
+}
+
+@keyframes style-effect-open {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .style-effect { display: none; }
+}
